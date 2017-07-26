@@ -1,5 +1,5 @@
 //Exercise 1
-/*
+
 let maxOfTwoNumbers = function(a,b) {
   if (a > b) {
     return a;
@@ -66,8 +66,6 @@ sumArray([1,2,3,4]);
 
 
 //HOMEWORK
-
-*/
 
 //The word guesser
 
