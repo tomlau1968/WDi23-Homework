@@ -15,9 +15,8 @@ var cartForParty = {
 let add = 0;
 
 const cashRegister = function (shoppingCart) {
-  for (let val in cartForParty) {
-  let a =  parseFloat(cartForParty[val]);
-  add += a;
+  for (let val in shoppingCart) {
+  add +=  parseFloat(shoppingCart[val]);
 }
 console.log(`add = ${add}`);
 return add;
