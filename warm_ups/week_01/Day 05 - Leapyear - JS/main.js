@@ -124,4 +124,7 @@ console.log( "2000 should be true:" );
 console.log( isLeapYear( 2000 ) );
 
 // Because the ternary is only *returning*, a log is required, or the function is mute.
+
+// To trigger the prompt, isLeapYear must be called with no argument or a falsy argument.
+
 console.log( isLeapYear() );
