@@ -18,7 +18,7 @@ let guessed = ['_', '_', '_'];
 const guessLetter = function (letter) {
   let wrongGuesses = 0;
   for (var i = 0; i < holder.length; i++) {
-    debugger
+
     if (letter == holder[i]){
       guessed[i] = letter;
     }else {
