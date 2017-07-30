@@ -93,7 +93,6 @@ const formattedTrip = function() {
 }
 
 let line1 = new Line('lineN', ['Times Square', '34th', '28th', '23rd', 'Union Square', '8th'], 'Union Square');
-
 let line2 = new Line('lineL', ['8th', '6th', 'Union Square', '3rd', '1st'], 'Union Square');
 let line3 = new Line('line6', ['Grand Central', '33rd', '28th', '23rd', 'Union Square', 'Astor Place'], 'Union Square');
 
