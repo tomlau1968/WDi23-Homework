@@ -23,11 +23,11 @@
 /* Tell the user the number of stops AND the stops IN ORDER that they will pass through or change at.*/
 
 
-// test simple movement along line
+// Array Structure
+// [[stations^n],line_name]
 let lineN = [['Times Square', '34th', '28th', '23rd', 'Union Square', '8th'], 'lineN'];
 let lineL = [['8th', '6th', 'Union Square', '3rd', '1st'], 'lineL'];
 let line6 = [['Grand Central', '33rd', '28th', '23rd', 'Union Square', 'Astor Place'], 'line6'];
-// change to OBJECTS
 
 
 // if trip in reverse (indexOf reverse) flip path
@@ -40,99 +40,91 @@ let line6 = [['Grand Central', '33rd', '28th', '23rd', 'Union Square', 'Astor Pl
 // on second line, get union square index and index of station
 
 const planTrip = function (line1, station1, line2, station2) {
-  const firstStop = line1.indexOf(station1);
-  const lastStop = line2.indexOf(station2);
-
+  
+  // if there are different lines being traversed
   if (line1[1] != line2[1]) {
+
     // get index for station and union square for line 1
     let pos1 = [line1[0].indexOf(station1), line1[0].indexOf("Union Square")]; 
-    // console.log('pos: ', pos1); 
     
     // get index for station and union square for line 2
     let pos2 = [line2[0].indexOf(station2), line2[0].indexOf("Union Square")];
-    // console.log('pos2: ', pos2);
     
+    // variables for traversal to be joined - ret: 's1, s2, s3, UNION SQUARE'
     let t1 = [];
     let t2 = [];
 
+    // these two can probably be consolidated into one function
+    // reverse position of values if station index is after Union Square
     if (pos1[0] > pos1[1]) {
       pos1.reverse();
-      // console.log('pos1: ', pos1);
       t1 = line1[0].slice(pos1[0], (pos1[1] + 1)).reverse();
     } else {
 
       t1 = line1[0].slice(pos1[0], (pos1[1] + 1));
     }
 
-
-      // console.log('t1: ', t1);
-      // console.log(`First Half: ${t1.join(', ')}`); 
-    // console.log('line1:', line1, 'pos1:',pos1);
-
-    // print out stations
-    // first half
-    //let t1 = line1.slice(pos1[0], (pos1[1] + 1));
-    //console.log(`First Half: ${t1.join(', ')}`); 
-
-    // second half
+    // second half of journey
     if (pos2[0] > pos2[1]) {
       pos2.reverse();
-      // console.log('pos2: ', pos2);
-      
       t2 = line2[0].slice(pos2[0], (pos2[1] + 1));
     } else {
 
       t2 = line2[0].slice(pos2[0], (pos2[1] + 1)).reverse();
     }
 
-    // console.log(t2);
-    // console.log(`Second Half: ${t2.reverse().join(', ')}`); 
-    // console.log('t2: ', t2, ', lineL: ', lineL);
-    // console.log(`Second Half: ${t2.join(', ')}`);
-
-    // get number of stops
+    // get number of stops for first half and second half of journey
     let stops = 0;
     stops += pos1[1] - pos1[0];
     stops += pos2[1] - pos2[0];
 
-    console.log(`You have passed through ${stops} stops`);
+    // journey details
+    console.log('------------------------------');
+    console.log(`%cYour journey will take ${stops} stops`, 'color: lightblue');
     
-    // UNION SQUARE SHOULD ALWAYS BE AT THE END OR AT THE START 
-    // console.log(t1);
-    console.log(`${t1.join(', ')} :CHANGE TO ${line2[1].toUpperCase()}: ${t2.join(', ')}`);
+    // UNION SQUARE SHOULD ALWAYS BE THE LAST STOP AT IN T1 AND THE FIRST STOP IN T2
+    console.log(`${t1.join(', ')}`);
+    console.log(`%c:CHANGE TO ${line2[1].toUpperCase()}:`, 'color: red');
+    console.log(`${t2.join(', ')}`);
+
   } else {
+
+    // if using the same line for traversal
+    let arr = [];
+    
+    // assign station index
     let pos = [line1[0].indexOf(station1), line1[0].indexOf(station2)];
-    let arr = line1[0].slice(pos[0], pos[1] + 1);
+
     if (pos[0] > pos[1]) {
       pos.reverse();
-    } 
+      arr = line1[0].slice(pos[0], pos[1] + 1).reverse();
+    } else {
+      arr = line1[0].slice(pos[0], pos[1] + 1);
+    }
 
-    // console.log(pos);
+    // get number of stops
     let stops = pos[1] - pos[0];
 
-    console.log(`You have passed through ${stops} stops`);
+    console.log('------------------------------');
+    console.log(`%cYour journey will take ${stops} stops`, 'color: lightblue');
     console.log(`${arr.join(', ')}`);
   }
 
-  // console.log(firstStop, lastStop);
-  
 }
 
-// const quickFind = function(start, end) {
-//   let a = lineN.indexOf(start);
-//   let b = lineN.indexOf(end);
-// 
-//   // get only the traversal stations
-//   let arr = lineN.slice(a, (b - a + 1));
-//   
-//   console.log(`${a} : ${b}`);
-//   console.log(arr.join(', '));
-// }
-
-// quickFind('Times Square', '23rd');
-// quickFind('34th', 'Union Square');
-
+// TESTS
+// Multi Line both ways
 planTrip(lineN, 'Times Square', lineL, '3rd');
+planTrip(lineL, '3rd', lineN, 'Times Square');
+// Random Sample
 planTrip(lineN, '8th', line6, 'Astor Place');
 planTrip(lineN, '34th', line6, '33rd');
 planTrip(line6, 'Grand Central', lineN, '23rd');
+planTrip(lineN, 'Times Square', lineN, 'Times Square');
+// single trip reverse
+planTrip(lineN, 'Times Square', lineN, '23rd');
+planTrip(lineN, '23rd', lineN, 'Times Square');
+
+// TODO allow object pass in
+// allow any transition point which should enable this
+// to be a utility app rather than fixed
