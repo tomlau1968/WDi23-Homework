@@ -40,35 +40,34 @@ const sixLine = ['Grand Central','s33rd','s28rd', 's23rd','Union Square', 'Astor
 const lLine = ['l8th','l6th','Union Square','l3rd','l1st' ];
 let myTrip = [];
 let totalStops = 0;
+let stops = [];
+
 
 const singleTrip = function (line, stopIn, stopOut){
   let stopInPosition = line.indexOf(stopIn); // To know the position in the array
   let stopOutPosition = line.indexOf(stopOut);
   let direction = stopOutPosition - stopInPosition // If it is negative, we should go left
   if (direction >0){
-    for (var i = stopInPosition+1; i < stopOutPosition+1; i++) { //check all positions from in and out (+1 so it doesnt count the current one)
-      myTrip.push (line[i]);                                  //push all lines in trip
+    for (var i = stopInPosition+1; i < stopOutPosition+1; i++) { //check all positions from in and out (+1 so it doesnt count the current one and stop out plus 1 as well so it counts the total correctly)
+      myTrip.push (line[i]);                   //add each line to the trip
+      stops.push (totalStops++);              //adds the total stops to our trip
+
+    }
+  }else {
+    for (var i = stopInPosition-1; i > stopOutPosition-1; i--) { // this will do the reverse stops and decrement
+    myTrip.push (line[i]);
+    stops.push (totalStops++);
     }
   }
 }; //singleTrip
 
-const fullTrip = function (lineIn, stopIn, lineOut, stopOut) {
-  if (lineIn === lineOut){
+const fullTrip = function (lineIn, stopIn, lineOut, stopOut) { //this will take the 2 lines
+  if (lineIn === lineOut){                                      // check if travelling in one line only
     singleTrip (lineIn, stopIn, stopOut);
   }else {
-    singleTrip (lineIn, stopIn, "Union Square");
-    singleTrip (lineOut, "Union Square", stopOut);
+    singleTrip (lineIn, stopIn, "Union Square");            //stop in union square to change to the next stop
+    singleTrip (lineOut, "Union Square", stopOut);          // starts at US and go to the destination
   }
-};
-
-
-
-// const planTrip = function (getInLine, stopIn, getOutLine, stopOut) {
-//
-//   for (var i = 0; i < nLine.length; i++) {
-//
-// };
-//
-//
-//
-// planTrip('N', 'Times Square', 'N', '8th');
+  console.log(myTrip);
+  console.log(totalStops);
+}; //fullTrip
