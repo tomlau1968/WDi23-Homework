@@ -34,40 +34,44 @@ The key to the lab is finding the index positions of each stop. (hint: indexOf()
 Make sure the stops that are the same for different lines have different names
 (i.e. 23rd on the N and on the 6 need to be differentiated)
 */
-
-const nLine = ['n34th','n28th','n23rd','Union Square' ];
-const sixLine = ['Grand Central','s33rd','s28rd', 's23rd','Union Square', 'Astor Place' ];
-const lLine = ['l8th','l6th','Union Square','l3rd','l1st' ];
-let myTrip = [];
-let totalStops = 0;
-let stops = [];
+let subwaySystem = {                                     //create an object to be able to call the lines
+  nLine: ['n34th','n28th','n23rd','Union Square' ],
+  sixLine: ['Grand Central','s33rd','s28rd', 's23rd','Union Square', 'Astor Place' ],
+  lLine:['l8th','l6th','Union Square','l3rd','l1st' ]
+}
+  let myTrip = "";                                        // where my trip will be showed
+  let totalStops = 0;
+  let stops = [];                                         // stops counts
 
 
 const singleTrip = function (line, stopIn, stopOut){
-  let stopInPosition = line.indexOf(stopIn); // To know the position in the array
-  let stopOutPosition = line.indexOf(stopOut);
-  let direction = stopOutPosition - stopInPosition // If it is negative, we should go left
+  let stopInPosition = subwaySystem[line].indexOf(stopIn);    // To know the position in the array
+  let stopOutPosition = subwaySystem[line].indexOf(stopOut);
+  let direction = stopOutPosition - stopInPosition;            // If it is negative, we should go left
   if (direction >0){
     for (var i = stopInPosition+1; i < stopOutPosition+1; i++) { //check all positions from in and out (+1 so it doesnt count the current one and stop out plus 1 as well so it counts the total correctly)
-      myTrip.push (line[i]);                   //add each line to the trip
+      myTrip = myTrip + " "+ (subwaySystem[line][i]) + ", ";                   //add each line to the trip
       stops.push (totalStops++);              //adds the total stops to our trip
 
     }
   }else {
     for (var i = stopInPosition-1; i > stopOutPosition-1; i--) { // this will do the reverse stops and decrement
-    myTrip.push (line[i]);
+    myTrip = myTrip + " "+ (subwaySystem[line][i]) + ", ";
     stops.push (totalStops++);
     }
   }
 }; //singleTrip
 
 const fullTrip = function (lineIn, stopIn, lineOut, stopOut) { //this will take the 2 lines
-  if (lineIn === lineOut){                                      // check if travelling in one line only
+  if (lineIn === lineOut){
+    myTrip = "You must travel through the following stops on the " + lineIn + ": ";                                  // check if travelling in one line only
     singleTrip (lineIn, stopIn, stopOut);
   }else {
+    myTrip = "You must travel through the following stops on the " + lineIn + ": ";
     singleTrip (lineIn, stopIn, "Union Square");            //stop in union square to change to the next stop
+    myTrip = myTrip + "Change at Union Square. Your journey continues through the following stops: ";
     singleTrip (lineOut, "Union Square", stopOut);          // starts at US and go to the destination
   }
   console.log(myTrip);
-  console.log(totalStops);
+  console.log(totalStops + " stops in total.");
 }; //fullTrip
