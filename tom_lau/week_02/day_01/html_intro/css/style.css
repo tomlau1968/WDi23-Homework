@@ -1,0 +1,34 @@
+ * {
+   border: 1px;
+   border-color: pink;
+ }
+
+body {
+  background-color: lightgray;
+  color: brown;
+}
+ p {
+   font-style: italic;
+ }
+
+h1, h2 {
+  text-decoration: underline;
+}
+
+p.intro {
+  font-style: normal;
+  font-size: 130%;
+  color: black;
+}
+
+.fancy {
+  color: red;
+  border: 1px solid red;
+}
+
+.example {
+  border: 1px solid green;
+  width: 400px;
+  height: 400px;
+  display: inline-block;
+}
