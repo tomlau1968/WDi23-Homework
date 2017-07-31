@@ -15,7 +15,7 @@ var rectangle = {
 
 let object = {
   length: 4,
-  width: 8
+  width: 4
 }
 
 //isSquare - Returns whether the rectangle is a square or not
