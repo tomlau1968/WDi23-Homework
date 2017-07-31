@@ -1,4 +1,6 @@
-let wordLetters = "PANDA";
+
+let wordLetters = "FOX";
+
 let correctlyGuessed = [];
 
 let guessedLetters = [];
