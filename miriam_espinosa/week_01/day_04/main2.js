@@ -15,9 +15,9 @@ var triangle = {
 */
 
 let triangle = {
-  sideA: 25,
+  sideA: 4,
   sideB: 4,
-  sideC: 6,
+  sideC: 4,
 }
 
 //isEquilateral - Returns whether the triangle is equilateral or not
@@ -53,7 +53,7 @@ let isArea = function (a){
 };
 isArea (triangle);
 
-
+debugger;
 //isObtuse - Returns whether the triangle is obtuse or not      a2+b2<c2
 
 let isObtuse = function (o){
