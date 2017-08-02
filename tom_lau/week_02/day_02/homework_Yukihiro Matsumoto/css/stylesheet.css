@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Cousine');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+body {
+background-image: url(../images/YukihiroMatsumoto_bg.jpg);
+position: relative;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+}
+
+.intro img {
+  position: absolute;
+  left: 154px;
+  top: 267px;
+}
+
+h1 {
+font-family: 'Cousine', monospace;
+color: #74d0ed;
+font-size:20px;
+position: relative;
+left: 170px;
+top: 262px;
+align-items: center;
+letter-spacing: 9px;
+}
+
+.intro p {
+font-family: 'Open Sans', sans-serif;
+width: 350px;
+font-size: 16px;
+color: white;
+left: 180px;
+top: 388px;
+letter-spacing: 9px;
+position: relative;
+}
+
+.button {
+top: 430px;
+left: 180px;
+position: relative;
+display: inline-block;
+}
+
+.button img {
+margin-right: 40px;
+}
